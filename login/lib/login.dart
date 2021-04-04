@@ -2,9 +2,19 @@ import 'package:flutter/material.dart';
 import 'background.dart';
 
 class LoginScreen extends StatelessWidget {
+  bool _secureText = true;
+
+  showhide() {
+    setState(() {
+      _secureText = !_secureText;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    Size size = MediaQuery
+        .of(context)
+        .size;
 
     return Scaffold(
       body: Background(
@@ -32,7 +42,11 @@ class LoginScreen extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
                 decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     labelText: "Username"
+
                 ),
               ),
             ),
@@ -43,10 +57,18 @@ class LoginScreen extends StatelessWidget {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
+                obscureText: _secureText,
                 decoration: InputDecoration(
-                    labelText: "Password"
-                ),
-                obscureText: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    labelText: "Password",
+                    suffixIcon: IconButton(
+                      icon: Icon(_secureText?Icons.visibility :
+                      Icons.visibility_off), onPressed: () {
+                      showhide();
+                    },
+                    )),
               ),
             ),
 
@@ -69,7 +91,8 @@ class LoginScreen extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: RaisedButton(
                 onPressed: () {},
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(80.0)),
                 textColor: Colors.white,
                 padding: const EdgeInsets.all(0),
                 child: Container(
@@ -116,4 +139,6 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+
+  void setState(Null Function() param0) {}
 }
